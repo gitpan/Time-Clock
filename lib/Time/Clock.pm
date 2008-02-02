@@ -4,7 +4,7 @@ use strict;
 
 use Carp;
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 use overload
 (
@@ -752,7 +752,7 @@ If the amount of time subtracted is large enough, the clock will wrap around fro
 
 =head1 AUTHOR
 
-John C. Siracusa (siracusa@mindspring.com)
+John C. Siracusa (siracusa@gmail.com)
 
 =head1 COPYRIGHT
 
