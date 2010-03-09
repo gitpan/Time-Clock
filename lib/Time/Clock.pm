@@ -4,7 +4,7 @@ use strict;
 
 use Carp;
 
-our $VERSION = '0.12';
+our $VERSION = '1.00';
 
 use overload
 (
@@ -12,8 +12,14 @@ use overload
    fallback => 1,
 );
 
-eval { require Time::HiRes };
-our $Have_HiRes_Time = $@ ? 0 : 1;
+our $Have_HiRes_Time;
+
+TRY:
+{
+  local $@;
+  eval { require Time::HiRes };
+  $Have_HiRes_Time = $@ ? 0 : 1;
+}
 
 # Allow an hour value of 24
 our $Allow_Hour_24 = 0;
@@ -192,8 +198,10 @@ sub format
   $format ||= ref($self)->default_format;
 
   my $hour  = $self->hour;
-  my $ihour = $hour > 12 ? ($hour - 12) : $hour;
+  my $ihour = $hour > 12 ? ($hour - 12) : $hour == 0 ? 12 : $hour;
   my $ns     = $self->nanosecond;
+
+  $ihour =~ s/^0//;
 
   my %formats =
   (
@@ -754,8 +762,8 @@ If the amount of time subtracted is large enough, the clock will wrap around fro
 
 John C. Siracusa (siracusa@gmail.com)
 
-=head1 COPYRIGHT
+=head1 LICENSE
 
-Copyright (c) 2006 by John C. Siracusa.  All rights reserved.  This program is
+Copyright (c) 2010 by John C. Siracusa.  All rights reserved.  This program is
 free software; you can redistribute it and/or modify it under the same terms
 as Perl itself.
