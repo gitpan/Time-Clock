@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Time-Clock
-version:            1.01
+version:            1.02
 abstract:           Twenty-four hour clock object with nanosecond precision.
 author:
     - John Siracusa <siracusa@gmail.com>
